@@ -37,14 +37,14 @@ export default function Table({ jobs, onDelete }: TableProps) {
     120,   // Date
     160,  // Company
     180,  // Title
-    70,   // Link
+    50,   // Link
     160,  // Location
     110,  // Type
     120,  // Source
     110,  // Status
     100,  // Remarks
-    70,   // Edit
-    70,   // Delete
+    40,   // Edit
+    40,   // Delete
   ]);
 
   function startResize(index: number, startX: number) {
@@ -123,7 +123,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
                 <td className="p-2">{job.createdAt.slice(0, 10)}</td>
                 <td className="p-2 truncate">{job.company}</td>
                 <td className="p-2 truncate">{job.title}</td>
-                <td className="p-2 text-center">
+                <td className="p-2">
                   <a href={job.link} target="_blank" className="text-blue-400 underline">
                     Link
                   </a>

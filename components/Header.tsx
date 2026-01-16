@@ -1,9 +1,17 @@
 
 export default function Header() {
 	return (
-		<div className="pt-5 space-y-1 text-center" >
-			<div className="dark:text-white/95 font-black text-4xl uppercase">Applied Jobs Tracker</div>
-			<div className="dark:text-white/95 text-md">Track your applied jobs smartly</div>
+		<div className="pt-6 space-y-2 text-center">
+			<div className="pt-6 space-y-2 text-center">
+				<h1 className="dark:text-white font-extrabold text-4xl tracking-tight uppercase">
+					Applied Jobs Tracker
+				</h1>
+				<p className="dark:text-white/70 text-base">
+					Turn job applications into insights, not spreadsheets
+				</p>
+			</div>
+
 		</div>
+
 	)
 }
