@@ -22,9 +22,18 @@ type TableProps = {
   onDelete: (id: string) => void;
 };
 
+const statusClasses: Record<string, string> = {
+  Applied: "bg-blue-800/25",
+  Interview: "bg-yellow-600/25",
+  Rejected: "bg-red-400/25",
+  Offer: "bg-green-600/80",
+};
+
+
 export default function Table({ jobs, onDelete }: TableProps) {
   // 🔹 Column widths (px)
   const [cols, setCols] = useState<number[]>([
+    50,   //S.No.
     120,   // Date
     160,  // Company
     180,  // Title
@@ -66,6 +75,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
   }
 
   const headers = [
+    "S.No.",
     "Date",
     "Company",
     "Title",
@@ -85,7 +95,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
         <table className="table-fixed border-collapse w-full">
 
           {/* ================= HEADER ================= */}
-          <thead className="sticky top-0 bg-black z-10">
+          <thead className="sticky top-0 text-white dark:text-white bg-black z-10">
             <tr>
               {headers.map((h, i) => (
                 <th
@@ -107,8 +117,9 @@ export default function Table({ jobs, onDelete }: TableProps) {
 
           {/* ================= BODY ================= */}
           <tbody>
-            {jobs.map((job) => (
+            {jobs.map((job, index) => (
               <tr key={job.id} className="border-b border-blue-200">
+                <td className="p-2">{jobs.length - index}</td>
                 <td className="p-2">{job.createdAt.slice(0, 10)}</td>
                 <td className="p-2 truncate">{job.company}</td>
                 <td className="p-2 truncate">{job.title}</td>
@@ -120,12 +131,17 @@ export default function Table({ jobs, onDelete }: TableProps) {
                 <td className="p-2 truncate">{job.location}</td>
                 <td className="p-2">{job.type}</td>
                 <td className="p-2">{job.source}</td>
-                <td className="p-2">{job.status}</td>
+                <td
+                  className={`p-2 dark:text-white rounded ligh:text-black 
+                    ${statusClasses[job.status] ?? "bg-gray-600"}
+                    `}
+                >
+                  {job.status}
+                </td>
                 <td className="p-2 truncate">{job.remarks ?? "-"}</td>
 
                 <td className="p-2 text-center">
                   <div className="bg-orange-600 w-fit text-white p-1 rounded">
-
                     <Link
                       href={`/edit/${job.id}`}
                       className=""

@@ -56,8 +56,8 @@ export default function Home() {
         </Link>
       </div>
 
-      {loading && <p className="text-center">Loading…</p>}
-      {error && <p className="text-center text-red-500">Failed to load jobs</p>}
+      {loading && <p className="text-center dark:text-white">Loading…</p>}
+      {error && <p className="text-center text-red-500 dark:text-white">Failed to load jobs</p>}
 
       {!loading && !error && (
         <Table jobs={jobs} onDelete={handleDelete} />

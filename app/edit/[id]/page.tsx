@@ -93,11 +93,11 @@ export default function Edit() {
         error && <div className="text-center mb-3 text-red-500" >Some error occured</div>
       }
       {
-        dataLoading && <div className="text-center mb-3 text-white" >Loading data...</div>
+        dataLoading && <div className="text-center mb-3 dark:text-white" >Loading data...</div>
       }
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 dark:text-white"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white"
       >
         <Input label="Company Name" name="company" defaultVal={form?.company} onChange={handleChange} />
         <Input label="Job Title" name="title" defaultVal={form?.title} onChange={handleChange} />
