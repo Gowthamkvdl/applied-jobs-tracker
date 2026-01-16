@@ -1,103 +1,67 @@
-"use client"
+"use client";
 
-import Header from "@/components/Header";
-import Table from "@/components/Table";
-import apiRequest from "@/lib/apiRequest";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import apiRequest from "@/lib/apiRequest";
+import Table from "@/components/Table";
+import Link from "next/link";
 
-const JOBS = [
-  {
-    id: "1",
-    company: "Google",
-    title: "Frontend Engineer",
-    link: "https://careers.google.com",
-    location: "Bangalore",
-    type: "Full Time",
-    source: "LinkedIn",
-    status: "Applied",
-    remarks: "Waiting for response",
-  },
-  {
-    id: "2",
-    company: "Amazon",
-    title: "SDE Intern",
-    link: "https://amazon.jobs",
-    location: "Hyderabad",
-    type: "Internship",
-    source: "Company Website",
-    status: "Rejected",
-    remarks: "Auto rejection",
-  },
-];
-
-type job = {
-  id: string,
-  company: string,
-  title: string,
-  link: string,
-  location: string,
-  type: string,
-  source: string,
-  status: string,
-  remarks: string,
-}
-
-
+type Job = {
+  id: string;
+  title: string;
+  company: string;
+  link: string;
+  location: string;
+  type: string;
+  source: string;
+  status: string;
+  remarks?: string | null;
+  createdAt: string;
+};
 
 export default function Home() {
-
-  const [jobs, setJobs] = useState<job[]>([])
-  const [error, setError] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-
-    const  getData = async () => {
+    const fetchJobs = async () => {
       try {
-        setError(false)
-        setLoading(true)
-
+        setLoading(true);
         const res = await apiRequest.get("/get");
-        setJobs(res.data.data)
-
-      } catch (error) {
-        console.log(error)
-        setError(true)
+        setJobs(res.data.data);
+      } catch (err) {
+        console.error(err);
+        setError(true);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    getData()
-  }, [])
+    fetchJobs();
+  }, []);
 
+  // 🔥 DELETE HANDLER LIVES HERE
+  function handleDelete(id: string) {
+    setJobs((prev) => prev.filter((job) => job.id !== id));
+  }
 
   return (
-    <div className="flex flex-col justify-center mx-6">
-      <div className="flex justify-end">
+    <div className="mx-6">
+      <div className="flex justify-end mb-3">
         <Link
           href="/add"
-          className="addBtn text-white px-3 py-2 bg-blue-600 rounded-md mb-3 w-fit"
+          className="bg-blue-600 text-white px-3 py-2 rounded"
         >
           Add More
         </Link>
       </div>
-      <div className="text-xs text-center text-white/50 mb-1 md:hidden">
-        ← Swipe horizontally →
-      </div>
-      {loading && (
-        <div className="text-center text-white/70">Loading jobs…</div>
-      )}
 
-      {error && (
-        <div className="text-center text-red-500">
-          Failed to load jobs
-        </div>
-      )}
+      {loading && <p className="text-center">Loading…</p>}
+      {error && <p className="text-center text-red-500">Failed to load jobs</p>}
 
-      {!loading && !error && <Table jobs={jobs} />}
+      {!loading && !error && (
+        <Table jobs={jobs} onDelete={handleDelete} />
+      )}
     </div>
   );
 }
