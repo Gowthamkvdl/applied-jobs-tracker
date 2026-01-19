@@ -48,7 +48,7 @@ export default function JobInputPage() {
 
     setForm((prev) => ({
       ...prev,
-      [name]: checked, 
+      [name]: checked,
     }));
   }
 
@@ -86,30 +86,35 @@ export default function JobInputPage() {
         <Input label="Job Title" name="title" onChange={handleChange} />
         <Input label="Job Link" name="link" onChange={handleChange} />
         <Input label="Location" name="location" onChange={handleChange} />
-
-        <Select
-          label="Type"
-          name="type"
-          options={["Full Time", "Internship"]}
-          onChange={handleChange}
-        />
-
-
-        <Select
-          label="Status"
-          name="status"
-          options={["Applied", "Interview", "Rejected", "Offer"]}
-          onChange={handleChange}
-        />
-        <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
         <Input label="Source" name="source" onChange={handleChange} />
-        <Input label="Remarks" name="remarks" onChange={handleChange} />
+        <div className="selectAndCheck flex justify-between items-baseline-last gap-0">
+
+          <Select
+            label="Type"
+            name="type"
+            options={["Full Time", "Internship"]}
+            onChange={handleChange}
+          />
+
+
+          <Select
+            label="Status"
+            name="status"
+            options={["Applied", "Interview", "Rejected", "Offer"]}
+            onChange={handleChange}
+          />
+          <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
+        </div>
+        <div className="md:col-span-2">
+
+          <Input label="Remarks" name="remarks" onChange={handleChange} />
+        </div>
 
         <button
           type="submit"
           className="md:col-span-2 mt-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-medium"
         >
-          {loading? "Adding..." : "Save Job"}
+          {loading ? "Adding..." : "Save Job"}
         </button>
 
       </form>

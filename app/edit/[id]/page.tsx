@@ -73,7 +73,7 @@ export default function Edit() {
 
     setForm((prev) => ({
       ...prev,
-      [name]: checked, 
+      [name]: checked,
     }));
   }
 
@@ -117,25 +117,29 @@ export default function Edit() {
         <Input label="Job Title" name="title" defaultVal={form?.title} onChange={handleChange} />
         <Input label="Job Link" name="link" defaultVal={form?.link} onChange={handleChange} />
         <Input label="Location" name="location" defaultVal={form?.location} onChange={handleChange} />
-
-        <Select
-          label="Type"
-          name="type"
-          options={["Full Time", "Internship"]}
-          onChange={handleChange}
-          selectedVal={form?.type}
-        />
-
-        <Select
-          label="Status"
-          name="status"
-          options={["Applied", "Interview", "Rejected", "Offer"]}
-          onChange={handleChange}
-          selectedVal={form?.status}
-        />
-        <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
         <Input label="Source" name="source" defaultVal={form?.source} onChange={handleChange} />
-        <Input label="Remarks" name="remarks" defaultVal={form?.remarks} onChange={handleChange} />
+        <div className="selectAndCheck flex justify-between items-baseline-last gap-0">
+          <Select
+            label="Type"
+            name="type"
+            options={["Full Time", "Internship"]}
+            onChange={handleChange}
+            selectedVal={form?.type}
+          />
+
+          <Select
+            label="Status"
+            name="status"
+            options={["Applied", "Interview", "Rejected", "Offer"]}
+            onChange={handleChange}
+            selectedVal={form?.status}
+          />
+
+          <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
+        </div>
+        <div className="md:col-span-2">
+          <Input label="Remarks" name="remarks" defaultVal={form?.remarks} onChange={handleChange} />
+        </div>
 
         <button
           type="submit"
