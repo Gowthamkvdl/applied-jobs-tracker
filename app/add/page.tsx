@@ -1,5 +1,6 @@
 "use client";
 
+import CheckBox from "@/components/CheckBox";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
 import apiRequest from "@/lib/apiRequest";
@@ -14,6 +15,7 @@ type JobForm = {
   location: string;
   type: "Full Time" | "Internship" | "";
   source: string;
+  email: boolean;
   status: "Applied" | "Interview" | "Rejected" | "Offer" | "";
   remarks: string;
 };
@@ -26,6 +28,7 @@ export default function JobInputPage() {
     location: "",
     type: "",
     source: "",
+    email: false,
     status: "",
     remarks: "",
   });
@@ -38,6 +41,15 @@ export default function JobInputPage() {
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleCheckChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, checked } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: checked, 
+    }));
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -89,7 +101,7 @@ export default function JobInputPage() {
           options={["Applied", "Interview", "Rejected", "Offer"]}
           onChange={handleChange}
         />
-
+        <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
         <Input label="Source" name="source" onChange={handleChange} />
         <Input label="Remarks" name="remarks" onChange={handleChange} />
 

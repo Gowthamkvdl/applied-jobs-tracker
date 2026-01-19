@@ -17,6 +17,7 @@ model Job {
   type      String
   status    String   @default("Applied")
   remarks   String?
+  email     Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

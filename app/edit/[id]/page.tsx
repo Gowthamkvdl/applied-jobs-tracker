@@ -1,5 +1,6 @@
 "use client"
 
+import CheckBox from "@/components/CheckBox";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
 import apiRequest from "@/lib/apiRequest";
@@ -14,6 +15,7 @@ type JobForm = {
   location: string;
   type: "Full Time" | "Internship" | "";
   source: string;
+  email: boolean,
   status: "Applied" | "Interview" | "Rejected" | "Offer" | "";
   remarks: string;
 };
@@ -27,6 +29,7 @@ export default function Edit() {
     location: "",
     type: "",
     source: "",
+    email: false,
     status: "",
     remarks: "",
   });
@@ -37,9 +40,9 @@ export default function Edit() {
   const router = useRouter()
   const { id } = useParams<{ id: string }>();
 
-  useEffect(() => { 
+  useEffect(() => {
 
-    const  getData = async () => {
+    const getData = async () => {
       try {
         setError(false)
         setDataLoading(true)
@@ -65,12 +68,23 @@ export default function Edit() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
+  function handleCheckChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, checked } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: checked, 
+    }));
+  }
+
+
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       setError(false)
       setLoading(true)
-      const res = await apiRequest.put(`/edit`, {id, ...form})
+      const res = await apiRequest.put(`/edit`, { id, ...form })
       router.push("/")
     } catch (error) {
       setError(true)
@@ -119,7 +133,7 @@ export default function Edit() {
           onChange={handleChange}
           selectedVal={form?.status}
         />
-
+        <CheckBox checked={form?.email ? form.email : false} onChange={handleCheckChange} name="email" label="Email" />
         <Input label="Source" name="source" defaultVal={form?.source} onChange={handleChange} />
         <Input label="Remarks" name="remarks" defaultVal={form?.remarks} onChange={handleChange} />
 

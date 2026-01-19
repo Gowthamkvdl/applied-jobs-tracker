@@ -13,6 +13,7 @@ type Job = {
   type: string;
   source: string;
   status: string;
+  email: boolean;
   remarks?: string | null;
   createdAt: string;
 };
@@ -42,6 +43,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
     110,  // Type
     120,  // Source
     110,  // Status
+    50,   // Email
     100,  // Remarks
     40,   // Edit
     40,   // Delete
@@ -84,6 +86,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
     "Type",
     "Source",
     "Status",
+    "Email",
     "Remarks",
     "Edit",
     "Delete",
@@ -138,8 +141,8 @@ export default function Table({ jobs, onDelete }: TableProps) {
                 >
                   {job.status}
                 </td>
+                <td className="p-2">{job.email? "Sent" : "-"}</td>
                 <td className="p-2 truncate">{job.remarks ?? "-"}</td>
-
                 <td className="p-2 text-center">
                   <div className="bg-orange-600 w-fit text-white p-1 rounded">
                     <Link
