@@ -13,6 +13,7 @@ type Job = {
   location: string;
   type: string;
   source: string;
+  email: boolean;
   status: string;
   remarks?: string | null;
   createdAt: string;
