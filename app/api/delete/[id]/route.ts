@@ -3,13 +3,13 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
+
     await prisma.job.delete({
-      where: {
-        id: params.id,
-      },
+      where: { id },
     });
 
     return NextResponse.json(
@@ -17,7 +17,7 @@ export async function DELETE(
       { status: 200 }
     );
   } catch (error) {
-    console.error("error", error);
+    console.error(error);
     return NextResponse.json(
       { message: "Some error occurred" },
       { status: 500 }
