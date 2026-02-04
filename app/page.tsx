@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import apiRequest from "@/lib/apiRequest";
 import Table from "@/components/Table";
 import Link from "next/link";
+import Loader from "@/components/Loader";
 
 type Job = {
   id: string;
@@ -72,7 +73,7 @@ export default function Home() {
       </div>
 
 
-      {loading && <p className="text-center dark:text-white">Loading…</p>}
+      {loading && <div className="text-center dark:text-white"><Loader /></div>}
       {error && <p className="text-center text-red-500 dark:text-white">Failed to load jobs</p>}
 
       {!loading && !error && (

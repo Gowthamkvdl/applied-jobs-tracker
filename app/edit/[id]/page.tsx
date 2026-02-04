@@ -2,6 +2,7 @@
 
 import CheckBox from "@/components/CheckBox";
 import Input from "@/components/Input";
+import Loader from "@/components/Loader";
 import Select from "@/components/Select";
 import apiRequest from "@/lib/apiRequest";
 import Link from "next/link";
@@ -107,9 +108,9 @@ export default function Edit() {
         error && <div className="text-center mb-3 text-red-500" >Some error occured</div>
       }
       {
-        dataLoading && <div className="text-center mb-3 dark:text-white" >Loading data...</div>
+        dataLoading && <div className="text-center mb-3 dark:text-white" ><Loader /></div>
       }
-      <form
+      {!error && !dataLoading && <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white"
       >
@@ -148,7 +149,7 @@ export default function Edit() {
           {loading ? "Updating..." : "Save Changes"}
         </button>
 
-      </form>
+      </form>}
     </div>
   )
 }
