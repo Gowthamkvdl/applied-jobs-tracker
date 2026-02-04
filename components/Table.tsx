@@ -129,7 +129,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
                 <td className="p-2">
                   <a href={job.link} target="_blank" className="text-blue-400 underline">
                     Link
-                  </a>
+                  </a> 
                 </td>
                 <td className="p-2 truncate">{job.location}</td>
                 <td className="p-2">{job.type}</td>
