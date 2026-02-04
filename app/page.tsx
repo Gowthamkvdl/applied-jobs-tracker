@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   return (
-    <div className="mx-6">
+    <div className="mx-md-6">
       <div className="flex justify-end gap-x-2 mb-3">
         <Link
           href="/dashboard"
