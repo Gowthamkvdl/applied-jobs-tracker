@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <div className="mx-md-6">
-      <div className="flex justify-end gap-x-2 mb-3">
+      <div className="flex justify-end gap-x-2 mb-3 mt-3 mt-md-0">
         <Link
           href="/dashboard"
           className="bg-blue-800 text-white flex items-center justify-center px-3 py-2 rounded"
