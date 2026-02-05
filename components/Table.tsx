@@ -133,7 +133,7 @@ export default function Table({ jobs, onDelete }: TableProps) {
                 </td>
                 <td className="p-2 truncate">{job.location}</td>
                 <td className="p-2">{job.type}</td>
-                <td className="p-2">{job.source}</td>
+                <td className="p-2 truncate">{job.source}</td>
                 <td
                   className={`p-2 dark:text-white rounded ligh:text-black 
                     ${statusClasses[job.status] ?? "bg-gray-600"}
