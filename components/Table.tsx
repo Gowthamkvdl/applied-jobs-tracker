@@ -122,28 +122,28 @@ export default function Table({ jobs, onDelete }: TableProps) {
           <tbody>
             {jobs.map((job, index) => (
               <tr key={job.id} className="border-b border-blue-200">
-                <td className="p-2">{jobs.length - index}</td>
-                <td className="p-2">{job.createdAt.slice(0, 10)}</td>
+                <td className="p-2 truncate">{jobs.length - index}</td>
+                <td className="p-2 truncate">{job.createdAt.slice(0, 10)}</td>
                 <td className="p-2 truncate">{job.company}</td>
                 <td className="p-2 truncate">{job.title}</td>
-                <td className="p-2">
+                <td className="p-2 truncate">
                   <a href={job.link} target="_blank" className="text-blue-400 underline">
                     Link
                   </a> 
                 </td>
                 <td className="p-2 truncate">{job.location}</td>
-                <td className="p-2">{job.type}</td>
+                <td className="p-2 truncate">{job.type}</td>
                 <td className="p-2 truncate">{job.source}</td>
                 <td
                   className={`p-2 dark:text-white rounded ligh:text-black 
-                    ${statusClasses[job.status] ?? "bg-gray-600"}
+                    ${statusClasses[job.status] ?? "bg-gray-600 truncate"}
                     `}
                 >
                   {job.status}
                 </td>
                 <td className="p-2">{job.email? "Sent" : "-"}</td>
                 <td className="p-2 truncate">{job.remarks ?? "-"}</td>
-                <td className="p-2 text-center">
+                <td className="p-2 text-center ">
                   <div className="bg-orange-600 w-fit text-white p-1 rounded">
                     <Link
                       href={`/edit/${job.id}`}
